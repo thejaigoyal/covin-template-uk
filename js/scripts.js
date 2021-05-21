@@ -93,6 +93,10 @@ function getResultTarget() {
   return document.getElementById("available_data");
 }
 
+function getAvailabilityParametersInfoTarget() {
+    return document.getElementById("availability_parameters_info");
+  }
+
 // console.log('res > ', getStateDistricts(35).then(r => console.log(r)));
 
 async function fetchData(stateId) {
@@ -177,6 +181,10 @@ function startOp() {
   //   showAvailable();
   const container = getResultTarget();
   removeAllChildNodes(container);
+  const info = getAvailabilityParametersInfoTarget();
+  info.innerHTML = `
+    Checking results for age ${min_age_limit} and for dose ${dose}
+  `
   fetchData();
   console.log(
     "🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧"
