@@ -94,8 +94,12 @@ function getResultTarget() {
 }
 
 function getAvailabilityParametersInfoTarget() {
-    return document.getElementById("availability_parameters_info");
-  }
+  return document.getElementById("availability_parameters_info");
+}
+
+function getNextCallInfoTarget() {
+  return document.getElementById("next_call_info");
+}
 
 // console.log('res > ', getStateDistricts(35).then(r => console.log(r)));
 
@@ -184,25 +188,31 @@ function startOp() {
   const info = getAvailabilityParametersInfoTarget();
   info.innerHTML = `
     Checking results for age ${min_age_limit} and for dose ${dose}
-  `
+  `;
   fetchData();
   console.log(
     "🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧"
   );
-  console.log(
-    "Next call at > " +
-      new Date(Date.now() + nextTime).getHours() +
-      ":" +
-      new Date(Date.now() + nextTime).getMinutes() +
-      ":" +
-      new Date(Date.now() + nextTime).getSeconds() +
-      ":" +
-      new Date(Date.now() + nextTime).getMilliseconds()
-  );
+  const nextCallTime =
+    "Next call at: " +
+    new Date(Date.now() + nextTime).getHours() +
+    ":" +
+    new Date(Date.now() + nextTime).getMinutes() +
+    ":" +
+    new Date(Date.now() + nextTime).getSeconds();
+    // +  ":" +
+    // new Date(Date.now() + nextTime).getMilliseconds();
+  const nextcallInfo = getNextCallInfoTarget();
+  nextcallInfo.innerHTML = nextCallTime;
+
   timer = setTimeout(startOp, nextTime);
 }
 
 function stopOp() {
   clearTimeout(timer);
   alert("stopped");
+  const info = getAvailabilityParametersInfoTarget();
+  info.innerHTML = "";
+  const nextcallInfo = getNextCallInfoTarget();
+  nextcallInfo.innerHTML = "";
 }
